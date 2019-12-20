@@ -1,0 +1,72 @@
+{
+    "name": "Transloadit",
+    "description": "<p>Transloadit is a Berlin based startup that takes care of user generated content. Web\/apps point their uploads directly to Transloadit&rsquo;s cloud platform so that they can be encoded, transformed, and stored back on the customer&rsquo;s server or cloud bucket. Transloadit supports upload progress bars, video encoding, adding logos, converting documents, generating waveforms (like soundcloud), and more as can be seen in their Demos section.<\/p>",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/transloadit-logo.png",
+    "tags": [
+        "conversions",
+        "files",
+        "have api",
+        "photos",
+        "thumbnails",
+        "uploads"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/transloadit\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Transloadit",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/transloadit-logo.png",
+            "humanURL": "http:\/\/transloadit.com\/",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/transloadit-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Base",
+            "url": "http:\/\/api.transloadit.com\/"
+        },
+        {
+            "type": "Blog",
+            "url": "http:\/\/transloadit.com\/blog"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "http:\/\/feeds.feedburner.com\/transloadit"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "http:\/\/www.crunchbase.com\/company\/transloadit"
+        },
+        {
+            "type": "Developers",
+            "url": "https:\/\/transloadit.com\/docs"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/transloadit"
+        },
+        {
+            "type": "Pricing",
+            "url": "https:\/\/transloadit.com\/pricing\/"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/#!\/transloadit"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/transloadit.com\/"
+        }
+    ]
+}
