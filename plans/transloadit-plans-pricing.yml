@@ -1,0 +1,134 @@
+specificationVersion: "0.1"
+id: transloadit-plans-pricing
+name: Transloadit Plans and Pricing
+description: >-
+  Transloadit offers tiered subscription plans based on monthly GB of
+  processing (input + output combined). All plans include the full feature set
+  including all 94 Robots, unlimited input files, and access to every
+  integration. Larger plans offer more priority slots, seats, higher file size
+  limits, and lower overage rates.
+url: https://transloadit.com/pricing/
+plans:
+  - name: Community
+    description: >-
+      Free tier for hobbyists and experimentation. Media outputs include
+      watermarks. No overage allowed.
+    price: 0
+    currency: USD
+    billingCycle: monthly
+    features:
+      - 5 GB monthly processing
+      - Unlimited input files
+      - 200 priority slots per region
+      - 1 seat
+      - 0.5 GB max file size
+      - 48-hour support response time
+      - All Robots included
+    limitations:
+      - Media outputs include watermarks
+      - No overage GBs allowed
+      - 0.5 GB file size limit
+
+  - name: Hobbyist
+    description: >-
+      Entry-level paid plan for small side projects. No watermarks. No
+      overage allowed.
+    price: 9
+    currency: USD
+    billingCycle: monthly
+    features:
+      - 5 GB monthly processing
+      - Unlimited input files
+      - 200 priority slots per region
+      - 2 seats
+      - 0.5 GB max file size
+      - 48-hour support response time
+      - All Robots included
+      - No watermarks
+    limitations:
+      - No overage GBs allowed
+      - 0.5 GB file size limit
+
+  - name: Startup
+    description: >-
+      Suitable for small startups and growing applications needing moderate
+      processing volume with overage support.
+    price: 69
+    currency: USD
+    billingCycle: monthly
+    features:
+      - 40 GB monthly processing
+      - Unlimited input files
+      - 300 priority slots per region
+      - 2 seats
+      - 5 GB max file size
+      - 24-hour support response time
+      - All Robots included
+      - Overage allowed at $1.80/GB
+    overage:
+      ratePerGB: 1.80
+      currency: USD
+
+  - name: Small Business
+    description: >-
+      Designed for small businesses with higher volume needs and more
+      concurrent processing slots.
+    price: 139
+    currency: USD
+    billingCycle: monthly
+    features:
+      - 100 GB monthly processing
+      - Unlimited input files
+      - 900 priority slots per region
+      - 5 seats
+      - 10 GB max file size
+      - 24-hour support response time
+      - All Robots included
+      - Overage allowed at $1.50/GB
+    overage:
+      ratePerGB: 1.50
+      currency: USD
+
+  - name: Medium Business
+    description: >-
+      High-volume plan for established businesses with faster support SLA and
+      high concurrent throughput.
+    price: 349
+    currency: USD
+    billingCycle: monthly
+    features:
+      - 300 GB monthly processing
+      - Unlimited input files
+      - 3000 priority slots per region
+      - 10 seats
+      - 20 GB max file size
+      - 12-hour support response time
+      - All Robots included
+      - Overage allowed at $1.20/GB
+    overage:
+      ratePerGB: 1.20
+      currency: USD
+
+  - name: Enterprise / Custom
+    description: >-
+      Custom plans with tiered volume discounts, SLAs, 24/7 priority support,
+      reduced transcoding queue times, white labeling, Slack Connect channel,
+      and custom Robot development. Contact sales for pricing.
+    price: null
+    currency: USD
+    billingCycle: monthly
+    features:
+      - Custom GB monthly processing
+      - 24/7 priority support with SLA
+      - Reduced transcoding queue times
+      - Support for self-hosted Uppy and Tus
+      - White labeling add-on available
+      - Custom Robot and feature development
+      - Slack Connect channel to developers
+      - Configurable monthly spending limits
+
+notes:
+  - Usage is calculated as input file sizes plus output file sizes combined
+  - Monthly data limits replenish on the billing cycle
+  - Some Robots apply up to 90% byte reduction discounts
+  - Custom plans available with volume-based tiered discounts

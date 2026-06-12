@@ -1,0 +1,89 @@
+specificationVersion: "0.1"
+id: transloadit-rate-limits
+name: Transloadit Rate Limits
+description: >-
+  Transloadit enforces rate limits on Assembly creation and concurrent
+  processing, as well as TCP connection frequency to prevent abuse. Official
+  SDKs automatically handle back-off and retry logic using the retryIn
+  property returned in error responses.
+url: https://transloadit.com/docs/api/rate-limiting/
+limits:
+  - name: Assembly Creation Rate
+    description: >-
+      Maximum number of new Assemblies that can be created per minute.
+    scope: account
+    limit: 250
+    period: minute
+    errorCode: RATE_LIMIT_REACHED
+    httpStatus: 413
+    retryInfo: >-
+      Response JSON includes info.retryIn with seconds to wait before retrying.
+
+  - name: Concurrent Assemblies
+    description: >-
+      Maximum number of Assemblies that can be running simultaneously.
+    scope: account
+    limit: 250
+    period: concurrent
+    errorCode: RATE_LIMIT_REACHED
+    httpStatus: 413
+    retryInfo: >-
+      Response JSON includes info.retryIn with seconds to wait before retrying.
+
+  - name: Assembly Maximum Duration
+    description: >-
+      Maximum processing time allowed for a single Assembly before it is
+      automatically terminated.
+    scope: assembly
+    limit: 8
+    period: hours
+    notes: Assemblies exceeding 8 hours are terminated automatically.
+
+  - name: High-Frequency TCP Connections
+    description: >-
+      Triggered when too many simultaneous TCP connections are opened from a
+      single client, too many TCP connections are opened within a 10-second
+      window, too many HTTP errors are generated within a 10-second window, or
+      too many HTTP requests are made within a 10-second window.
+    scope: client-ip
+    errorCode: "429 Too Many Requests"
+    httpStatus: 429
+    notes: >-
+      HAProxy enforces this limit at the connection layer. Response message
+      indicates the specific reason for the 429.
+
+errorResponses:
+  - code: RATE_LIMIT_REACHED
+    httpStatus: 413
+    description: Assembly creation rate limit or concurrent Assembly limit exceeded.
+    payload:
+      error: RATE_LIMIT_REACHED
+      message: Request limit reached
+      info:
+        retryIn: <seconds until retry is allowed>
+
+  - code: "429 Too Many Requests"
+    httpStatus: 429
+    description: >-
+      High-frequency TCP connection limit exceeded at the proxy layer.
+    payload:
+      error: "429 Too Many Requests"
+      message: "HAProxy thinks you have sent too many requests..."
+
+retryBehavior:
+  - sdk: Node.js SDK
+    retries: 5
+    strategy: Automatic back-off using retryIn value from response
+  - sdk: Ruby SDK
+    retries: 2
+    strategy: >-
+      Automatically retries 2 additional times on RATE_LIMIT_REACHED; raises
+      RateLimitReached exception if all attempts fail. Configurable via the
+      tries option.
+  - sdk: Other SDKs
+    strategy: >-
+      Official SDKs implement back-off and retry logic based on the retryIn
+      property. Custom integrations should respect retryIn.
+
+enterpriseNotes:
+  - Enterprise customers may request higher rate limits by contacting support.

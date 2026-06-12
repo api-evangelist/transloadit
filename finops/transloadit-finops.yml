@@ -1,0 +1,154 @@
+specificationVersion: "1.0"
+id: transloadit-finops
+name: Transloadit FinOps
+description: >-
+  FinOps Framework FOCUS-aligned cost management reference for Transloadit
+  API usage. Covers cost allocation, unit economics, optimization levers,
+  and budget controls for organizations consuming Transloadit file processing
+  and media encoding services.
+url: https://transloadit.com/pricing/
+
+costModel:
+  type: subscription-plus-overage
+  description: >-
+    Transloadit charges a flat monthly subscription fee that includes a bundled
+    GB allowance (input + output combined). Processing beyond the included GB is
+    billed at a per-GB overage rate. All features and Robots are included across
+    every plan; cost differences relate to volume, throughput, and seat count.
+  billingCycle: monthly
+  currency: USD
+
+unitEconomics:
+  primaryUnit: GB
+  unitDescription: >-
+    One GB of usage equals the combined size of all input files uploaded plus
+    all output files produced within a billing period.
+  overageRates:
+    - plan: Startup
+      ratePerGB: 1.80
+    - plan: Small Business
+      ratePerGB: 1.50
+    - plan: Medium Business
+      ratePerGB: 1.20
+    - plan: Enterprise / Custom
+      ratePerGB: negotiated
+  notes:
+    - Some Robots apply byte-reduction discounts of up to 90%, lowering
+      effective GB consumption.
+    - Usage resets monthly on the billing date.
+
+plans:
+  - name: Community
+    monthlyBaseCost: 0
+    includedGB: 5
+    overageAllowed: false
+  - name: Hobbyist
+    monthlyBaseCost: 9
+    includedGB: 5
+    overageAllowed: false
+  - name: Startup
+    monthlyBaseCost: 69
+    includedGB: 40
+    overageAllowed: true
+    overageRatePerGB: 1.80
+  - name: Small Business
+    monthlyBaseCost: 139
+    includedGB: 100
+    overageAllowed: true
+    overageRatePerGB: 1.50
+  - name: Medium Business
+    monthlyBaseCost: 349
+    includedGB: 300
+    overageAllowed: true
+    overageRatePerGB: 1.20
+  - name: Enterprise / Custom
+    monthlyBaseCost: negotiated
+    includedGB: negotiated
+    overageAllowed: true
+    overageRatePerGB: negotiated
+
+costAllocation:
+  dimensions:
+    - name: Plan Tier
+      description: Base subscription cost allocated by plan tier
+    - name: GB Consumed
+      description: Proportional allocation of included GB and overage charges
+    - name: Robot Type
+      description: >-
+        Different Robots (video/encode, image/resize, audio/waveform, etc.)
+        consume varying amounts of GB. Track per-Robot usage to identify
+        high-cost workflows.
+    - name: Team / Workspace
+      description: >-
+        Allocate costs across teams using seat counts and workspace-level
+        usage metrics.
+  tagging:
+    recommendation: >-
+      Use Transloadit Template names and Assembly metadata fields to tag
+      processing jobs by project, environment (dev/staging/prod), or team for
+      showback and chargeback.
+
+optimization:
+  levers:
+    - name: Right-size Plan
+      description: >-
+        Monitor monthly GB consumption via the Billing API and right-size to
+        the plan whose included GB matches average usage. Avoid persistent
+        overage by upgrading rather than paying per-GB overages.
+    - name: Robot Byte Reduction
+      description: >-
+        Certain Robots offer up to 90% byte reduction. Prefer these Robots
+        where output quality permits to reduce effective GB usage.
+    - name: Avoid Redundant Outputs
+      description: >-
+        Each output file counts toward GB usage. Minimize unnecessary encoding
+        variants; generate only formats and resolutions required by end users.
+    - name: Input File Optimization
+      description: >-
+        Compress or resize input files upstream before submitting to
+        Transloadit to reduce input GB contribution.
+    - name: Spending Limits
+      description: >-
+        Configure a monthly spending cap (available on Enterprise/Custom plans)
+        to prevent runaway overage costs.
+    - name: Upgrade for Lower Overage Rate
+      description: >-
+        If consistent overage is incurred at $1.80/GB (Startup), upgrading to
+        Small Business ($1.50/GB) or Medium Business ($1.20/GB) may reduce
+        total monthly cost.
+
+budgeting:
+  spendingLimits:
+    available: true
+    plans: [Enterprise / Custom]
+    description: >-
+      Monthly spending caps can be configured on custom plans to prevent
+      budget overruns.
+  billingAPI:
+    url: https://transloadit.com/docs/api/#billing
+    description: >-
+      Retrieve monthly billing data programmatically via GET /bills/{month}
+      to integrate into FinOps dashboards and cost reporting pipelines.
+  alerts:
+    recommendation: >-
+      Monitor GB consumption via the Billing API and set up alerts when usage
+      approaches the included GB threshold to avoid unexpected overage charges.
+
+focusAlignment:
+  billedCost: Monthly subscription fee plus any per-GB overage charges
+  effectiveCost: >-
+    Subscription + overage minus any Robot byte-reduction discounts or
+    negotiated volume discounts
+  listUnitPrice:
+    - dimension: GB overage (Startup)
+      price: 1.80
+      currency: USD
+    - dimension: GB overage (Small Business)
+      price: 1.50
+      currency: USD
+    - dimension: GB overage (Medium Business)
+      price: 1.20
+      currency: USD
+  resourceType: FileProcessingGB
+  serviceName: Transloadit API
+  providerName: Transloadit
