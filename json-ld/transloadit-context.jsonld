@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "transloadit": "https://transloadit.com/vocab#",
+    "Assembly": "transloadit:Assembly",
+    "AssemblyStep": "transloadit:AssemblyStep",
+    "Robot": "transloadit:Robot",
+    "Template": "transloadit:Template",
+    "TemplateCredential": "transloadit:TemplateCredential",
+    "Uppy": "transloadit:Uppy",
+    "SmartCDN": "transloadit:SmartCDN",
+    "assemblyId": {
+      "@id": "transloadit:assemblyId",
+      "@type": "@id"
+    },
+    "assemblyStatus": "transloadit:assemblyStatus",
+    "assemblyInstructions": "transloadit:assemblyInstructions",
+    "robot": "transloadit:robot",
+    "robotSettings": "transloadit:robotSettings",
+    "templateId": {
+      "@id": "transloadit:templateId",
+      "@type": "@id"
+    },
+    "credentialName": "transloadit:credentialName",
+    "credentialType": "transloadit:credentialType",
+    "notifyUrl": "transloadit:notifyUrl",
+    "signature": "transloadit:signature",
+    "authKey": "transloadit:authKey",
+    "steps": "transloadit:steps",
+    "use": "transloadit:use",
+    "result": "transloadit:result",
+    "uploadedFiles": "transloadit:uploadedFiles",
+    "processingResults": "transloadit:processingResults",
+    "queueJobSlots": "transloadit:queueJobSlots",
+    "bill": "transloadit:bill",
+    "MediaFile": {
+      "@id": "transloadit:MediaFile",
+      "@type": "schema:MediaObject"
+    },
+    "encoding": "transloadit:encoding",
+    "transcoding": "transloadit:transcoding",
+    "thumbnailGeneration": "transloadit:thumbnailGeneration",
+    "imageResizing": "transloadit:imageResizing",
+    "audioExtraction": "transloadit:audioExtraction",
+    "documentConversion": "transloadit:documentConversion",
+    "provider": "transloadit:provider",
+    "storageProvider": "transloadit:storageProvider"
+  },
+  "@graph": [
+    {
+      "@id": "https://transloadit.com",
+      "@type": "Organization",
+      "name": "Transloadit",
+      "url": "https://transloadit.com",
+      "description": "File processing and media handling API for encoding video, resizing images, extracting audio, generating thumbnails, and transcribing media via assembly instructions.",
+      "sameAs": [
+        "https://github.com/transloadit",
+        "https://x.com/transloadit",
+        "https://www.linkedin.com/company/transloadit"
+      ]
+    },
+    {
+      "@id": "https://api2.transloadit.com",
+      "@type": "WebAPI",
+      "name": "Transloadit API",
+      "url": "https://transloadit.com/docs/api/",
+      "provider": {
+        "@id": "https://transloadit.com"
+      },
+      "documentation": "https://transloadit.com/docs/api/",
+      "termsOfService": "https://transloadit.com/legal/terms-of-service/",
+      "description": "Core REST API for creating and managing Assemblies, Templates, Template Credentials, Webhooks, Billing, and Queue monitoring. Supports video encoding, image manipulation, audio processing, document conversion, and AI-based media tasks via 94 Robots."
+    }
+  ]
+}

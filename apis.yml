@@ -68,6 +68,12 @@ common:
     url: rate-limits/transloadit-rate-limits.yml
   - type: FinOps
     url: finops/transloadit-finops.yml
+  - type: BlogRSS
+    url: https://transloadit.com/blog.atom
+  - type: Blogs
+    url: blogs/blogs.json
+  - type: JSONLDContext
+    url: json-ld/transloadit-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
