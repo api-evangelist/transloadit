@@ -1,0 +1,662 @@
+"""
+Transloadit GraphQL Schema
+Source: https://transloadit.com/docs/api/
+Transloadit is a file uploading and media processing service providing 94 Robots
+for video encoding, image resizing, audio extraction, transcription, and more.
+"""
+
+# ─── Scalars ─────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar URL
+
+# ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum AssemblyStatus {
+  REQUEST_ABORTED
+  ASSEMBLY_UPLOADING
+  ASSEMBLY_EXECUTING
+  ASSEMBLY_REPLAYING
+  ASSEMBLY_COMPLETED
+  ASSEMBLY_CANCELED
+  REQUEST_TIMEOUT
+  ASSEMBLY_TIMED_OUT
+  ASSEMBLY_ERROR
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+  RETRYING
+}
+
+enum QueueStatus {
+  OK
+  BUSY
+  RATE_LIMITED
+}
+
+enum RobotType {
+  VIDEO_ENCODE
+  VIDEO_MERGE
+  VIDEO_SUBTITLE
+  VIDEO_THUMBS
+  IMAGE_RESIZE
+  IMAGE_OPTIMIZE
+  IMAGE_DESCRIBE
+  IMAGE_FACEDETECT
+  IMAGE_OCR
+  AUDIO_ENCODE
+  AUDIO_MERGE
+  AUDIO_ARTWORK
+  AUDIO_WAVEFORM
+  DOCUMENT_CONVERT
+  DOCUMENT_THUMBS
+  FILE_COMPRESS
+  FILE_DECOMPRESS
+  FILE_FILTER
+  FILE_RENAME
+  FILE_SERVE
+  FILE_HASH
+  SPEECH_TRANSCRIBE
+  TEXT_TRANSLATE
+  STORE_S3
+  STORE_GCS
+  STORE_SFTP
+  STORE_BACKBLAZE
+  IMPORT_S3
+  IMPORT_URL
+  IMPORT_GDRIVE
+  IMPORT_DROPBOX
+  HTML_CONVERT
+}
+
+enum SignatureType {
+  SHA1
+  SHA256
+  SHA384
+  SHA512
+}
+
+enum SubscriptionPlan {
+  STARTER
+  PROFESSIONAL
+  BUSINESS
+  ENTERPRISE
+}
+
+# ─── Assembly Types ───────────────────────────────────────────────────────────
+
+"""Top-level representation of a Transloadit processing job."""
+type Assembly {
+  id: ID!
+  details: AssemblyDetails!
+  status: AssemblyStatus!
+  notifications: AssemblyNotifications
+  results: AssemblyResults
+  uploads: [Upload!]
+  steps: [Step!]
+  error: Error
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  completedAt: DateTime
+}
+
+"""Detailed metadata about an Assembly."""
+type AssemblyDetails {
+  assemblyId: AssemblyID!
+  assemblyUrl: URL!
+  assemblySSLUrl: URL!
+  message: String
+  ok: String
+  wasCanceled: Boolean!
+  tookSeconds: Float
+  bytesReceived: Int
+  bytesExpected: Int
+  filesReceived: Int
+  filesExpected: Int
+  template: Template
+  warnings: [String!]
+  parentId: ID
+}
+
+"""Unique identifier for an Assembly."""
+type AssemblyID {
+  value: ID!
+}
+
+"""Notification configuration and state for an Assembly."""
+type AssemblyNotifications {
+  notifyUrl: NotificationURL
+  notifyStatus: NotificationStatus
+  notifyResponseCode: Int
+  notifyResponseBody: String
+  notifyStart: DateTime
+  notifyEnd: DateTime
+  notifications: [Notification!]
+}
+
+"""The output files produced by all Steps in an Assembly."""
+type AssemblyResults {
+  results: JSON
+  byStep: [StepResult!]
+}
+
+# ─── File Types ───────────────────────────────────────────────────────────────
+
+"""A file uploaded into or produced by an Assembly."""
+type File {
+  id: FileID!
+  name: FileName!
+  size: FileSize!
+  mime: FileMime!
+  url: FileURL!
+  details: FileDetails!
+  original: OriginalFile
+}
+
+"""Extended metadata about a File."""
+type FileDetails {
+  md5hash: String
+  width: Int
+  height: Int
+  duration: Float
+  bitrate: Int
+  fps: Float
+  colorspace: String
+  encoding: String
+  meta: JSON
+  type: String
+}
+
+"""Opaque identifier for a File."""
+type FileID {
+  value: ID!
+}
+
+"""The filename of an uploaded or produced file."""
+type FileName {
+  value: String!
+  basename: String!
+  extension: String
+}
+
+"""The size of a file in bytes."""
+type FileSize {
+  bytes: Int!
+  humanReadable: String!
+}
+
+"""The MIME type of a file."""
+type FileMime {
+  value: String!
+  category: String!
+}
+
+"""A URL pointing to a file stored by Transloadit or its CDN."""
+type FileURL {
+  value: URL!
+  ssl: URL
+  cdn: URL
+}
+
+"""The original file as uploaded before processing."""
+type OriginalFile {
+  name: FileName!
+  size: FileSize!
+  mime: FileMime!
+  url: FileURL!
+}
+
+# ─── Step Types ───────────────────────────────────────────────────────────────
+
+"""A single processing step within an Assembly, powered by a Robot."""
+type Step {
+  name: String!
+  robot: Robot!
+  details: StepDetails!
+  result: StepResult
+}
+
+"""Configuration details for a Step."""
+type StepDetails {
+  use: JSON
+  params: JSON
+  robot: RobotType!
+  outputMeta: JSON
+  ffmpegStack: String
+  preset: String
+}
+
+"""The files produced by a single Step."""
+type StepResult {
+  stepName: String!
+  files: [File!]!
+  meta: JSON
+}
+
+# ─── Robot Types ─────────────────────────────────────────────────────────────
+
+"""A Transloadit Robot that performs a specific media processing task."""
+type Robot {
+  type: RobotType!
+  details: RobotDetails!
+}
+
+"""Descriptive information about a Robot."""
+type RobotDetails {
+  name: String!
+  slug: String!
+  description: String!
+  docsUrl: URL!
+  supportedFormats: [String!]
+  outputFormats: [String!]
+}
+
+# ─── Instruction Types ────────────────────────────────────────────────────────
+
+"""Assembly Instructions define Steps and configuration for a processing job."""
+type Instructions {
+  steps: JSON!
+  details: InstructionsDetails!
+  template: Template
+}
+
+"""Metadata about the Instructions object."""
+type InstructionsDetails {
+  notifyUrl: URL
+  allowStepsOverride: Boolean!
+  fields: JSON
+  auth: AuthKey
+}
+
+# ─── Template Types ───────────────────────────────────────────────────────────
+
+"""A reusable set of Assembly Instructions stored server-side."""
+type Template {
+  id: ID!
+  name: TemplateName!
+  content: TemplateContent!
+  details: TemplateDetails!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""The name of a Template."""
+type TemplateName {
+  value: String!
+  slug: String
+}
+
+"""The stored Instructions content of a Template."""
+type TemplateContent {
+  steps: JSON!
+  notifyUrl: URL
+  allowStepsOverride: Boolean!
+}
+
+"""Additional metadata for a Template."""
+type TemplateDetails {
+  templateId: ID!
+  requireSignatureAuth: Boolean!
+  isPublic: Boolean!
+  encryptionVersion: String
+}
+
+# ─── Notification Types ───────────────────────────────────────────────────────
+
+"""A webhook notification sent when an Assembly completes or errors."""
+type Notification {
+  id: ID!
+  assemblyId: ID!
+  url: NotificationURL!
+  status: NotificationStatus!
+  sign: NotificationSign
+  details: NotificationDetails!
+  sentAt: DateTime
+  responseCode: Int
+  responseBody: String
+}
+
+"""The target URL for a webhook notification."""
+type NotificationURL {
+  value: URL!
+  verified: Boolean!
+}
+
+"""The delivery status of a notification."""
+type NotificationStatus {
+  value: String!
+  retryCount: Int!
+  lastAttempt: DateTime
+}
+
+"""Signature information attached to a notification payload."""
+type NotificationSign {
+  signature: String!
+  type: SignatureType!
+}
+
+"""Extended details about a notification event."""
+type NotificationDetails {
+  notifyId: ID!
+  notifyResponseCode: Int
+  notifyResponseBody: String
+  notifyStart: DateTime
+  notifyEnd: DateTime
+  tookSeconds: Float
+}
+
+# ─── Upload Types ─────────────────────────────────────────────────────────────
+
+"""Represents a file upload into an Assembly."""
+type Upload {
+  id: ID!
+  details: UploadDetails!
+  file: UploadFile!
+  multipart: UploadMultipart
+}
+
+"""Metadata about an Upload operation."""
+type UploadDetails {
+  assemblyId: ID!
+  fieldName: String!
+  chunked: Boolean!
+  tusOffset: Int
+  tusUploadLength: Int
+  bytesReceived: Int!
+  completed: Boolean!
+}
+
+"""The file associated with an Upload."""
+type UploadFile {
+  name: FileName!
+  size: FileSize!
+  mime: FileMime!
+  url: FileURL
+  original: OriginalFile
+}
+
+"""Multipart upload metadata for large files."""
+type UploadMultipart {
+  uploadId: String
+  parts: Int
+  chunkSize: Int
+  totalBytes: Int
+}
+
+# ─── Best Practice ────────────────────────────────────────────────────────────
+
+"""A recommended best practice for using the Transloadit API."""
+type BestPractice {
+  id: ID!
+  title: String!
+  description: String!
+  category: String!
+  docsUrl: URL
+  tags: [String!]
+}
+
+# ─── Queue Types ──────────────────────────────────────────────────────────────
+
+"""The current state of the Transloadit processing queue."""
+type Queue {
+  status: QueueStatus!
+  details: QueueDetails!
+}
+
+"""Detailed queue metrics."""
+type QueueDetails {
+  jobsQueued: Int!
+  jobsProcessing: Int!
+  avgWaitSeconds: Float
+  maxWaitSeconds: Float
+  region: String!
+  updatedAt: DateTime!
+}
+
+# ─── Account Types ────────────────────────────────────────────────────────────
+
+"""A Transloadit account."""
+type Account {
+  id: ID!
+  details: AccountDetails!
+  subscription: Subscription
+  apiKeys: [APIKey!]
+  createdAt: DateTime!
+}
+
+"""Details about a Transloadit account."""
+type AccountDetails {
+  email: String!
+  companyName: String
+  plan: SubscriptionPlan!
+  creditBalance: Float!
+  timezone: String!
+  status: String!
+}
+
+# ─── Billing Types ────────────────────────────────────────────────────────────
+
+"""A monthly billing record for an account."""
+type Bill {
+  id: ID!
+  month: String!
+  details: BillDetails!
+  items: [BillItem!]!
+  createdAt: DateTime!
+}
+
+"""Summary totals for a bill."""
+type BillDetails {
+  totalCents: Int!
+  currencyCode: String!
+  paid: Boolean!
+  paidAt: DateTime
+  invoiceUrl: URL
+}
+
+"""A single line item on a bill."""
+type BillItem {
+  id: ID!
+  description: String!
+  quantity: Float!
+  unitCents: Int!
+  totalCents: Int!
+  category: String!
+  period: String
+}
+
+# ─── Subscription Types ───────────────────────────────────────────────────────
+
+"""A subscription plan attached to an account."""
+type Subscription {
+  id: ID!
+  plan: SubscriptionPlan!
+  details: SubscriptionDetails!
+  creditCard: CreditCard
+  startedAt: DateTime!
+  renewsAt: DateTime
+}
+
+"""Details about a subscription."""
+type SubscriptionDetails {
+  monthlyCreditCents: Int!
+  overageRateCents: Int!
+  maxFileSize: Int
+  maxAssembliesPerMonth: Int
+  supportLevel: String!
+  active: Boolean!
+}
+
+# ─── Payment Types ────────────────────────────────────────────────────────────
+
+"""A credit card on file for billing."""
+type CreditCard {
+  id: ID!
+  last4: String!
+  brand: String!
+  expiryMonth: Int!
+  expiryYear: Int!
+  holderName: String
+  isDefault: Boolean!
+}
+
+# ─── Auth Types ───────────────────────────────────────────────────────────────
+
+"""An API key for authenticating Transloadit API requests."""
+type APIKey {
+  id: ID!
+  key: String!
+  label: String
+  createdAt: DateTime!
+  lastUsedAt: DateTime
+  active: Boolean!
+}
+
+"""The auth key (public) used in Assembly params."""
+type AuthKey {
+  key: String!
+  expires: DateTime
+}
+
+"""The auth secret (private) used to sign Assembly params."""
+type AuthSecret {
+  secret: String!
+  hint: String
+}
+
+# ─── Webhook Types ────────────────────────────────────────────────────────────
+
+"""An event payload delivered via webhook when an Assembly changes state."""
+type WebhookEvent {
+  id: ID!
+  assemblyId: ID!
+  eventType: String!
+  assembly: Assembly
+  signature: Signature!
+  deliveredAt: DateTime!
+}
+
+# ─── Signature Types ──────────────────────────────────────────────────────────
+
+"""A cryptographic signature for verifying webhook payloads or API params."""
+type Signature {
+  value: String!
+  type: SignatureType!
+  algorithm: String!
+  timestamp: DateTime
+}
+
+# ─── Error Types ─────────────────────────────────────────────────────────────
+
+"""An error returned by the Transloadit API."""
+type Error {
+  code: String!
+  message: String!
+  details: ErrorDetails
+}
+
+"""Extended information about an API error."""
+type ErrorDetails {
+  assemblyId: ID
+  stepName: String
+  robotType: RobotType
+  httpStatus: Int
+  requestId: String
+  docsUrl: URL
+  retryable: Boolean!
+  fields: JSON
+}
+
+# ─── Input Types ─────────────────────────────────────────────────────────────
+
+input AssemblyInput {
+  templateId: ID
+  steps: JSON
+  notifyUrl: URL
+  fields: JSON
+  allowStepsOverride: Boolean
+}
+
+input TemplateInput {
+  name: String!
+  steps: JSON!
+  notifyUrl: URL
+  allowStepsOverride: Boolean
+  requireSignatureAuth: Boolean
+}
+
+# ─── Query ───────────────────────────────────────────────────────────────────
+
+type Query {
+  """Fetch a single Assembly by its ID."""
+  assembly(id: ID!): Assembly
+
+  """List Assemblies filtered by status with pagination."""
+  assemblies(status: AssemblyStatus, limit: Int, offset: Int): [Assembly!]!
+
+  """Fetch a single Template by its ID."""
+  template(id: ID!): Template
+
+  """List all Templates for the authenticated account."""
+  templates(limit: Int, offset: Int): [Template!]!
+
+  """Fetch current processing queue status."""
+  queue: Queue!
+
+  """Fetch the authenticated account details."""
+  account: Account!
+
+  """Fetch billing information for a given month (format: YYYY-MM)."""
+  bill(month: String!): Bill
+
+  """Fetch all notifications sent for a specific Assembly."""
+  notifications(assemblyId: ID!): [Notification!]!
+
+  """List all API keys for the authenticated account."""
+  apiKeys: [APIKey!]!
+
+  """Fetch best practices for using the Transloadit API."""
+  bestPractices(category: String): [BestPractice!]!
+}
+
+# ─── Mutation ─────────────────────────────────────────────────────────────────
+
+type Mutation {
+  """Create and start a new Assembly."""
+  createAssembly(input: AssemblyInput!): Assembly!
+
+  """Cancel a running Assembly."""
+  cancelAssembly(id: ID!): Assembly!
+
+  """Replay a completed or errored Assembly."""
+  replayAssembly(id: ID!): Assembly!
+
+  """Create a new Template."""
+  createTemplate(input: TemplateInput!): Template!
+
+  """Update an existing Template."""
+  updateTemplate(id: ID!, input: TemplateInput!): Template!
+
+  """Delete a Template by ID."""
+  deleteTemplate(id: ID!): Boolean!
+
+  """Create a new API key."""
+  createAPIKey(label: String): APIKey!
+
+  """Revoke an API key."""
+  revokeAPIKey(id: ID!): Boolean!
+}
+
+# ─── Subscription ─────────────────────────────────────────────────────────────
+
+type Subscription {
+  """Stream real-time status updates for an Assembly."""
+  assemblyStatusChanged(id: ID!): Assembly!
+
+  """Stream incoming webhook events for the authenticated account."""
+  webhookEvent: WebhookEvent!
+}

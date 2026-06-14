@@ -1,79 +1,78 @@
 aid: transloadit
 name: Transloadit
-description: >-
-  File processing and media handling API for encoding video, resizing images,
-  extracting audio, generating thumbnails, and transcribing media via assembly
-  instructions. Supports 94 robots for automation, browser-based uploads via
-  Uppy, Smart CDN, and integrations with S3, Google Drive, and more.
+description: File processing and media handling API for encoding video, resizing images,
+  extracting audio, generating thumbnails, and transcribing media via assembly instructions.
+  Supports 94 robots for automation, browser-based uploads via Uppy, Smart CDN, and
+  integrations with S3, Google Drive, and more.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/transloadit/refs/heads/main/apis.yml
-created: "2026-06-12"
-modified: "2026-06-12"
-specificationVersion: "0.19"
+created: '2026-06-12'
+modified: '2026-06-12'
+specificationVersion: '0.19'
 tags:
-  - File Processing
-  - Media Encoding
-  - Video Transcoding
-  - Image Resizing
-  - Audio Extraction
-  - Thumbnail Generation
-  - File Uploading
-  - Media API
+- File Processing
+- Media Encoding
+- Video Transcoding
+- Image Resizing
+- Audio Extraction
+- Thumbnail Generation
+- File Uploading
+- Media API
 apis:
-  - name: Transloadit API
-    description: >-
-      Core REST API for creating and managing Assemblies (processing jobs),
-      Templates, Template Credentials, Webhooks, Billing, and Queue monitoring.
-      Uses bearer token authentication. Supports video encoding, image
-      manipulation, audio processing, document conversion, and AI-based media
-      tasks via 94 Robots.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://transloadit.com/docs/api/
-    baseURL: https://api2.transloadit.com
-    tags:
-      - Assemblies
-      - Templates
-      - Credentials
-      - Webhooks
-      - Billing
-      - Queue
-    properties:
-      - type: Documentation
-        url: https://transloadit.com/docs/api/
-      - type: Authentication
-        url: https://transloadit.com/docs/api/#authentication
-      - type: RateLimits
-        url: https://transloadit.com/docs/api/rate-limiting/
-common:
-  - type: Website
-    url: https://transloadit.com/
+- name: Transloadit API
+  description: Core REST API for creating and managing Assemblies (processing jobs),
+    Templates, Template Credentials, Webhooks, Billing, and Queue monitoring. Uses
+    bearer token authentication. Supports video encoding, image manipulation, audio
+    processing, document conversion, and AI-based media tasks via 94 Robots.
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://transloadit.com/docs/api/
+  baseURL: https://api2.transloadit.com
+  tags:
+  - Assemblies
+  - Templates
+  - Credentials
+  - Webhooks
+  - Billing
+  - Queue
+  properties:
   - type: Documentation
-    url: https://transloadit.com/docs/
-  - type: GitHub
-    url: https://github.com/transloadit
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/transloadit
-  - type: Blog
-    url: https://transloadit.com/blog/
-  - type: Pricing
-    url: https://transloadit.com/pricing/
-  - type: StatusPage
-    url: https://status.transloadit.com/
-  - type: X
-    url: https://x.com/transloadit
-  - type: Plans
-    url: plans/transloadit-plans-pricing.yml
+    url: https://transloadit.com/docs/api/
+  - type: Authentication
+    url: https://transloadit.com/docs/api/#authentication
   - type: RateLimits
-    url: rate-limits/transloadit-rate-limits.yml
-  - type: FinOps
-    url: finops/transloadit-finops.yml
-  - type: BlogRSS
-    url: https://transloadit.com/blog.atom
-  - type: Blogs
-    url: blogs/blogs.json
-  - type: JSONLDContext
-    url: json-ld/transloadit-context.jsonld
+    url: https://transloadit.com/docs/api/rate-limiting/
+  - url: graphql/transloadit-graphql.md
+    type: GraphQL
+common:
+- type: Website
+  url: https://transloadit.com/
+- type: Documentation
+  url: https://transloadit.com/docs/
+- type: GitHub
+  url: https://github.com/transloadit
+- type: LinkedIn
+  url: https://www.linkedin.com/company/transloadit
+- type: Blog
+  url: https://transloadit.com/blog/
+- type: Pricing
+  url: https://transloadit.com/pricing/
+- type: StatusPage
+  url: https://status.transloadit.com/
+- type: X
+  url: https://x.com/transloadit
+- type: Plans
+  url: plans/transloadit-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/transloadit-rate-limits.yml
+- type: FinOps
+  url: finops/transloadit-finops.yml
+- type: BlogRSS
+  url: https://transloadit.com/blog.atom
+- type: Blogs
+  url: blogs/blogs.json
+- type: JSONLDContext
+  url: json-ld/transloadit-context.jsonld
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
