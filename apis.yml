@@ -5,7 +5,7 @@ description: File processing and media handling API for encoding video, resizing
   Supports 94 robots for automation, browser-based uploads via Uppy, Smart CDN, and
   integrations with S3, Google Drive, and more.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/transloadit/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
@@ -25,7 +25,7 @@ apis:
     Templates, Template Credentials, Webhooks, Billing, and Queue monitoring. Uses
     bearer token authentication. Supports video encoding, image manipulation, audio
     processing, document conversion, and AI-based media tasks via 94 Robots.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://transloadit.com/docs/api/
   baseURL: https://api2.transloadit.com
   tags:
