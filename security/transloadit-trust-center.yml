@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://transloadit.com/security/
+url: https://transloadit.com/security/
+certifications:
+- SOC 2
+- ISO 27001
+- PCI DSS
+- HIPAA
+- GDPR
+evidence:
+- source: https://transloadit.com/security/
+  keywords:
+  - soc 2
+  - iso 27001
+  - pci dss
+  - hipaa
+  - gdpr

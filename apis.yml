@@ -45,6 +45,12 @@ apis:
   - url: graphql/transloadit-graphql.md
     type: GraphQL
 common:
+- type: TrustCenter
+  url: security/transloadit-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/transloadit-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/transloadit-domain-security.yml
 - type: Website
   url: https://transloadit.com/
 - type: Documentation
