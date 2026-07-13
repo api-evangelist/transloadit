@@ -10,10 +10,7 @@
   "feeds": [
     {
       "source": "https://www.linkedin.com/company/transloadit",
-      "feed_url": "https://www.linkedin.com/company/transloadit",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "error": "HTTPError"
     },
     {
       "source": "https://transloadit.com/blog.atom",
@@ -23,6 +20,6 @@
       "method": "feed"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-27T12:03:07Z"
+  "post_count": 10,
+  "fetched": "2026-07-11T11:50:51Z"
 }
