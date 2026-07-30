@@ -5,7 +5,19 @@ description: File processing and media handling API for encoding video, resizing
   Supports 94 robots for automation, browser-based uploads via Uppy, Smart CDN, and
   integrations with S3, Google Drive, and more.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/transloadit.png
 url: https://raw.githubusercontent.com/api-evangelist/transloadit/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
