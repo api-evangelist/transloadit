@@ -44,6 +44,13 @@ apis:
   - Assemblies
   - Templates
   - Credentials
+  - Webhook
+  - Billing
+  - Queue
+  tags_raw:
+  - Assemblies
+  - Templates
+  - Credentials
   - Webhooks
   - Billing
   - Queue
