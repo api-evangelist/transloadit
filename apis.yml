@@ -5,6 +5,17 @@ description: File processing and media handling API for encoding video, resizing
   Supports 94 robots for automation, browser-based uploads via Uppy, Smart CDN, and
   integrations with S3, Google Drive, and more.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
