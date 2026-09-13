@@ -1,0 +1,33 @@
+generated: '2026-09-11'
+method: probed
+source: https://api.transloadit.com/mcp
+status: published
+server:
+  name: transloadit
+  transport: http
+  url: https://api.transloadit.com/mcp
+deployment:
+  mode: remote
+  endpoint: https://api.transloadit.com/mcp
+  verified: probed
+  probe: live
+  checked: '2026-09-11'
+  source: docs-check 2026-09-12 (endpoint found in the provider's own documentation, then probed)
+tools_count: 7
+tools:
+- name: transloadit_lint_assembly_instructions
+  description: ''
+- name: transloadit_create_assembly
+  description: ''
+- name: transloadit_get_assembly_status
+  description: ''
+- name: transloadit_wait_for_assembly
+  description: ''
+- name: transloadit_list_robots
+  description: ''
+- name: transloadit_get_robot_help
+  description: ''
+- name: transloadit_list_templates
+  description: ''
+tools_source: live tools/list via initialize handshake, 2026-09-12 (signals/audit_mcp_authorship.py --probe)
+authorship: provider
