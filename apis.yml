@@ -57,7 +57,7 @@ apis:
   - Credentials
   - Webhook
   - Billing
-  - Queue
+  - Queues
   tags_raw:
   - Assemblies
   - Templates
