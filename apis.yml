@@ -72,8 +72,6 @@ apis:
     url: https://transloadit.com/docs/api/#authentication
   - type: RateLimits
     url: https://transloadit.com/docs/api/rate-limiting/
-  - url: graphql/transloadit-graphql.md
-    type: GraphQL
 common:
 - type: TrustCenter
   url: security/transloadit-trust-center.yml
