@@ -16,18 +16,21 @@ deployment:
 tools_count: 7
 tools:
 - name: transloadit_lint_assembly_instructions
-  description: ''
+  description: Lint Assembly Instructions without creating an Assembly. Returns structured issues.
 - name: transloadit_create_assembly
-  description: ''
+  description: Create or resume an Assembly, optionally uploading files and waiting for completion.
 - name: transloadit_get_assembly_status
-  description: ''
+  description: Fetch the latest Assembly status by URL or ID.
 - name: transloadit_wait_for_assembly
-  description: ''
+  description: Polls until the Assembly completes or timeout is reached.
 - name: transloadit_list_robots
-  description: ''
+  description: Returns a filtered list of robots with short summaries.
 - name: transloadit_get_robot_help
-  description: ''
+  description: Returns a robot summary and parameter details.
 - name: transloadit_list_templates
-  description: ''
+  description: 'List Assembly Templates (owned and/or builtin). Tip: pass include_builtin: "exclusively-latest"
+    to list builtins only.'
 tools_source: live tools/list via initialize handshake, 2026-09-12 (signals/audit_mcp_authorship.py --probe)
 authorship: provider
+descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
+  --descriptions, 2026-09-28
