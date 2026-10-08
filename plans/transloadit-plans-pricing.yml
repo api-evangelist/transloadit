@@ -136,3 +136,48 @@ notes:
   - Monthly data limits replenish on the billing cycle
   - Some Robots apply up to 90% byte reduction discounts
   - Custom plans available with volume-based tiered discounts
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - hybrid
+  - subscription
+  units: []
+  plans:
+  - name: Community
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Hobbyist
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Startup
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Small Business
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Medium Business
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise / Custom
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
