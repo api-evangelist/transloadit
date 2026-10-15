@@ -45,7 +45,7 @@
     app_slug: transloadit
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: transloadit-pipedream
   label: Pipedream
@@ -71,5 +71,5 @@
     actions: true
     sources: true
     builder: Pipedream repo (component)
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
