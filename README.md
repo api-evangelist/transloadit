@@ -1,4 +1,4 @@
-# Transloadit (transloadit)
+# Transloadit
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,86 +64,127 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Transloadit is a file processing and media handling API for encoding video, resizing images, extracting audio, generating thumbnails, and transcribing media via assembly instructions. The platform supports 94 Robots for automated processing workflows, browser-based uploads via the open-source Uppy file uploader, a Smart CDN for URL-driven conversion, and seamless integrations with storage providers including Amazon S3, Google Drive, Backblaze, and FTP. Founded in 2009 and profitable since 2012, Transloadit serves customers including The New York Times and Coursera.
+File processing and media handling API for encoding video, resizing images, extracting audio, generating thumbnails, and transcribing media via assembly instructions. Supports 94 robots for automation, browser-based uploads via Uppy, Smart CDN, and integrations with S3, Google Drive, and more.
 
-APIs.json: https://raw.githubusercontent.com/api-evangelist/transloadit/refs/heads/main/apis.yml
+**Areas:** File Processing · Media Encoding · Video Transcoding · Image Resizing · Audio Extraction · Thumbnail Generation · File Uploading · Media API
 
-Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=transloadit-api-evangelist&utm_content=repo
+## Transloadit on APIs.io
 
-## Tags
+Everything profiled for Transloadit is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/transloadit/](https://apis.io/providers/transloadit/)** — or go straight to one of the APIs or properties below.
 
-- File Processing
-- Media Encoding
-- Video Transcoding
-- Image Resizing
-- Audio Extraction
-- Thumbnail Generation
-- File Uploading
-- Media API
+### APIs (1)
 
-## APIs
+- [Transloadit API](https://apis.io/apis/transloadit/transloadit-api/) — Core REST API for creating and managing Assemblies (processing jobs), Templates, Template Credentials, Webhooks, Billing, and Queue monitoring. Uses bearer…
 
-### Transloadit API
+### Published properties
 
-Core REST API for creating and managing Assemblies (processing jobs), Templates, Template Credentials, Webhooks, Billing, and Queue monitoring. Uses bearer token authentication. Supports video encoding, image manipulation, audio processing, document conversion, and AI-based media tasks via 94 Robots.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Base URL:** https://api2.transloadit.com
-- **Documentation:** https://transloadit.com/docs/api/
-- **Rate Limits:** https://transloadit.com/docs/api/rate-limiting/
+#### GraphQL (1)
 
-**API Sections:** Assemblies | Templates | Template Credentials | Webhooks | Billing | Queue
+GraphQL schemas.
 
-## Plans, Rate Limits, and FinOps
+- [Moved to /providers/transloadit/](https://apis.io/graphqls/transloadit/transloadit-graphql/)
 
-### Plans
+#### MCP servers (1)
 
-Transloadit offers five tiers plus custom Enterprise plans. All plans include every feature and all 94 Robots; differences are volume, throughput, and seats.
+Model Context Protocol servers that expose the API to agents.
 
-| Plan | Price/mo | Included GB | Overage/GB | Seats | Max File Size |
-|---|---|---|---|---|---|
-| Community | Free | 5 GB | Not allowed | 1 | 0.5 GB |
-| Hobbyist | $9 | 5 GB | Not allowed | 2 | 0.5 GB |
-| Startup | $69 | 40 GB | $1.80 | 2 | 5 GB |
-| Small Business | $139 | 100 GB | $1.50 | 5 | 10 GB |
-| Medium Business | $349 | 300 GB | $1.20 | 10 | 20 GB |
-| Enterprise | Custom | Custom | Negotiated | Custom | Custom |
+- [transloadit](https://apis.io/servers/transloadit/transloadit/)
 
-Full plans detail: [plans/transloadit-plans-pricing.yml](plans/transloadit-plans-pricing.yml)
+#### JSON-LD (1)
 
-### Rate Limits
+Linked-data contexts for the provider's vocabulary.
 
-- 250 Assemblies per minute (HTTP 413 / RATE_LIMIT_REACHED)
-- 250 concurrent Assemblies (HTTP 413 / RATE_LIMIT_REACHED)
-- 8-hour maximum Assembly duration
-- High-frequency TCP connection limits enforced at the proxy layer (HTTP 429)
-- Official SDKs include automatic retry with back-off using the retryIn property
+- [Transloadit Context](https://apis.io/jsonld/transloadit/transloadit-context/)
 
-Full rate limits detail: [rate-limits/transloadit-rate-limits.yml](rate-limits/transloadit-rate-limits.yml)
+#### Security (3)
 
-### FinOps
+Authentication, trust centre, and vulnerability disclosure.
 
-Usage is billed as combined input + output GB. Key cost levers include right-sizing the plan tier, leveraging Robot byte-reduction (up to 90%), minimizing redundant output variants, and configuring spending limits on Enterprise plans. The Billing API at `/bills/{month}` supports programmatic cost reporting.
+- [Transloadit Domain Security](https://apis.io/security/transloadit/transloadit-domain-security/)
+- [Transloadit Trust Center](https://apis.io/security/transloadit/transloadit-trust-center/)
+- [Transloadit Vulnerability Disclosure](https://apis.io/security/transloadit/transloadit-vulnerability-disclosure/)
 
-Full FinOps detail: [finops/transloadit-finops.yml](finops/transloadit-finops.yml)
+#### Plans and pricing (1)
 
-## Timestamps
+Published plans, tiers and prices.
 
-- **Created:** 2026-06-12
-- **Modified:** 2026-06-12
+- [Transloadit Plans Pricing](https://apis.io/plans/transloadit/transloadit-plans-pricing/)
 
-## Common
+#### Rate limits (1)
 
-| Type | URL |
+Published request limits.
+
+- [Transloadit Rate Limits](https://apis.io/rate-limits/transloadit/transloadit-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Transloadit Finops](https://apis.io/finops/transloadit/transloadit-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://transloadit.com/)
+- [Documentation](https://transloadit.com/docs/)
+- [Pricing](https://transloadit.com/pricing/)
+- [Blog](https://transloadit.com/blog/)
+- [Status](https://status.transloadit.com/)
+
+## API Evangelist rating
+
+**Kin Score 25.5** — emerging · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
 |---|---|
-| Website | https://transloadit.com/ |
-| Documentation | https://transloadit.com/docs/ |
-| GitHub | https://github.com/transloadit |
-| LinkedIn | https://www.linkedin.com/company/transloadit |
-| Blog | https://transloadit.com/blog/ |
-| Pricing | https://transloadit.com/pricing/ |
-| Status Page | https://status.transloadit.com/ |
-| X | https://x.com/transloadit |
+| Discoverability | 68.3 |
+| Contract quality | 10.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 31.6 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 26.3 |
 
-## Maintainers
+**Agent readiness 13.7** — agent-aware
 
-**Kin Lane** — kin@apievangelist.com
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 27.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/transloadit/](https://apis.io/providers/transloadit/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Transloadit: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/transloadit/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
